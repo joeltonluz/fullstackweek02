@@ -1,8 +1,7 @@
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { Product } from "@prisma/client";
 import Image from "next/image";
 import { Badge } from "./badge";
-import { ArrowDown01Icon, ArrowDownIcon } from "lucide-react";
+import { ArrowDownIcon } from "lucide-react";
 
 interface ProductItemProps {
   product: ProductWithTotalPrice;
@@ -10,8 +9,8 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
   return (
-    <div className="flex max-w-[156px] flex-col gap-4">
-      <div className=" relative bg-accent rounded-lg h-[170px] w-[156px] flex items-center justify-center">
+    <div className="flex flex-col gap-4">
+      <div className="relative bg-accent rounded-lg h-[170px] w-[156px] flex items-center justify-center">
         <Image
           src={product.imageUrls[0]}
           height={0}
@@ -42,7 +41,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
               <p className="text-base font-bold">
                 R${product.totalPrice.toFixed(2)}
               </p>
-              <p className="line-through opacity-75 text-xs">
+              <p className="line-through opacity-75 text-xs text-red-600">
                 R${Number(product.basePrice).toFixed(2)}
               </p>
             </>

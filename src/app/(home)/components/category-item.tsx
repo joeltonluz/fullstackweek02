@@ -26,7 +26,7 @@ const CategoryItem = ({ category }: CategoryItemProps) => {
   return (
     <Badge
       variant="outline"
-      className="flex items-center justify-center py-3 gap-2 rounded-lg"
+      className="flex items-center justify-center py-3 gap-2 rounded-lg cursor-pointer"
     >
       {categoryIcon[category.slug as keyof typeof categoryIcon]}
       <span className="text-xs font-bold">{category.name}</span>
