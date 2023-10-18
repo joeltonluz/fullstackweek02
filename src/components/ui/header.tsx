@@ -13,12 +13,19 @@ import {
 } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "./sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTrigger,
+} from "./sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback } from "./avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Separator } from "./separator";
 import { useTheme } from "next-themes";
+import Link from "next/link";
 
 const Header = () => {
   const { setTheme, theme } = useTheme();
@@ -64,60 +71,78 @@ const Header = () => {
           )}
 
           <div className="mt-4 flex flex-col gap-3">
-            {status === "unauthenticated" ? (
-              <Button
-                onClick={handleLoginClick}
-                variant="outline"
-                className="w-full justify-start gap-2"
-              >
-                <LogInIcon size={16} />
-                Fazer Login
-              </Button>
-            ) : (
-              <Button
-                onClick={handleLogoutClick}
-                variant="outline"
-                className="w-full justify-start gap-2"
-              >
-                <LogOutIcon size={16} />
-                Fazer Logout
-              </Button>
-            )}
+            <SheetClose asChild>
+              {status === "unauthenticated" ? (
+                <Button
+                  onClick={handleLoginClick}
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <LogInIcon size={16} />
+                  Fazer Login
+                </Button>
+              ) : (
+                <Button
+                  onClick={handleLogoutClick}
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <LogOutIcon size={16} />
+                  Fazer Logout
+                </Button>
+              )}
+            </SheetClose>
 
-            <Button variant="outline" className="w-full justify-start gap-2">
-              <HomeIcon size={16} />
-              Início
-            </Button>
+            <SheetClose asChild>
+              <Link href={"/"}>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <HomeIcon size={16} />
+                  Início
+                </Button>
+              </Link>
+            </SheetClose>
 
             <Button variant="outline" className="w-full justify-start gap-2">
               <PercentIcon size={16} />
               Ofertas
             </Button>
 
-            <Button variant="outline" className="w-full justify-start gap-2">
-              <ListOrderedIcon size={16} />
-              Catálogo
-            </Button>
+            <SheetClose asChild>
+              <Link href="/catalog">
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                >
+                  <ListOrderedIcon size={16} />
+                  Catálogo
+                </Button>
+              </Link>
+            </SheetClose>
 
-            {theme === "light" ? (
-              <Button
-                variant="outline"
-                className="w-full justify-start gap-2"
-                onClick={() => setTheme("dark")}
-              >
-                <MoonIcon size={16} />
-                Mudar Tema para Dark
-              </Button>
-            ) : (
-              <Button
-                variant="outline"
-                className="w-full justify-start gap-2"
-                onClick={() => setTheme("light")}
-              >
-                <SunIcon size={16} />
-                Mudar Tema para Light
-              </Button>
-            )}
+            <SheetClose asChild>
+              {theme === "light" ? (
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                  onClick={() => setTheme("dark")}
+                >
+                  <MoonIcon size={16} />
+                  Mudar Tema para Dark
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  className="w-full justify-start gap-2"
+                  onClick={() => setTheme("light")}
+                >
+                  <SunIcon size={16} />
+                  Mudar Tema para Light
+                </Button>
+              )}
+            </SheetClose>
           </div>
         </SheetContent>
       </Sheet>
