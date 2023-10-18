@@ -6,9 +6,10 @@ import {
   LogInIcon,
   LogOutIcon,
   MenuIcon,
-  PercentCircleIcon,
+  MoonIcon,
   PercentIcon,
   ShoppingCartIcon,
+  SunIcon,
 } from "lucide-react";
 import { Button } from "./button";
 import { Card } from "./card";
@@ -17,8 +18,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback } from "./avatar";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { Separator } from "./separator";
+import { useTheme } from "next-themes";
 
 const Header = () => {
+  const { setTheme, theme } = useTheme();
   const { status, data } = useSession();
 
   const handleLoginClick = async () => {
@@ -95,6 +98,26 @@ const Header = () => {
               <ListOrderedIcon size={16} />
               Catálogo
             </Button>
+
+            {theme === "light" ? (
+              <Button
+                variant="outline"
+                className="w-full justify-start gap-2"
+                onClick={() => setTheme("dark")}
+              >
+                <MoonIcon size={16} />
+                Mudar Tema para Dark
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                className="w-full justify-start gap-2"
+                onClick={() => setTheme("light")}
+              >
+                <SunIcon size={16} />
+                Mudar Tema para Light
+              </Button>
+            )}
           </div>
         </SheetContent>
       </Sheet>
