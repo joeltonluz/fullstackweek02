@@ -76,7 +76,10 @@ const ProductInfo = ({
           <TruckIcon />
           <div className="flex flex-col">
             <p className="text-xs">
-              Entrega via <span className="font-bold">NEXTPackage</span>
+              Entrega via{" "}
+              <span className="font-bold text-yellow-300 bg-primary rounded px-1">
+                SEDEX 10
+              </span>
             </p>
             <p className="text-xs text-primary">
               Envio para <span className="font-bold">todo Brasil</span>{" "}
