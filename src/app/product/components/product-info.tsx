@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import DiscountBadge from "@/components/ui/discount-badge";
+import { useToast } from "@/components/ui/use-toast";
 import { formatCurrency } from "@/helpers/formatCurrency";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import { CartContext } from "@/providers/cart";
@@ -13,6 +14,7 @@ interface ProductInfoProps {
 }
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
+  const { toast } = useToast();
   const [quantity, setQuantity] = useState(1);
   const { addProductToCart } = useContext(CartContext);
 
@@ -22,7 +24,21 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
   };
 
   const handleAddToCartClick = () => {
-    addProductToCart({ ...product, quantity });
+    try {
+      console.log("opa");
+      addProductToCart({ ...product, quantity });
+      console.log("opa2");
+      toast({
+        title: `Produto: ${product.name}`,
+        description: `Adicionado ao carrinho, quantidade: ${quantity}`,
+      });
+    } catch (error) {
+      toast({
+        title: `Produto: ${product.name}`,
+        description: "Problema ao adicionar ao carrinho",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
